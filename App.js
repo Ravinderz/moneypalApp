@@ -1,12 +1,12 @@
+import { NavigationContainer } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet } from "react-native";
-import { Tabs } from "./src/components/Tabs";
-
+import { RootNav } from "./src/components/Tabs";
 export default function App() {
   return (
-    <>
-      <Tabs />
-    </>
+    <NavigationContainer>
+      <RootNav />
+    </NavigationContainer>
   );
 }
 

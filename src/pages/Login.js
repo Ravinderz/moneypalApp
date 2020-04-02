@@ -1,7 +1,17 @@
+import { useNavigation } from '@react-navigation/native';
 import React from "react";
 import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
+
+
 export const Login = () => {
+
+  const navigation = useNavigation();
+
+const navigateToOTP = () => {
+  navigation.navigate('OTP');
+}
+
   return (
     <View style={styles.container}>
       <Image
@@ -10,7 +20,7 @@ export const Login = () => {
       />
       <View style={styles.buttonContainer}>
         <TouchableOpacity
-          onPress={() => Alert.alert("Simple Button pressed")}
+          onPress={() => navigateToOTP()}
           style={styles.primary}
         >
           <Text style={{textAlign:'center',color:'#ffffff'}}>LOGIN</Text>

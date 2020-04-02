@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import DatePicker from 'react-native-datepicker';
-import { HeaderStrip } from "../components/HeaderStrip";
 import { TransactionList } from "../components/TransactionList";
 
-export const Calendar = () => {
-  const title = 'Calendar';
+export const Calendar = () => {  
   [fromDate,setFromDate] = useState("");
   [toDate,setToDate] = useState("");
 
+  const search = () => {
+    console.log("from date : "+fromDate , " to date : "+toDate);
+  }
+
   return (
     <View style={styles.container}>
-       <HeaderStrip title={title}/>
       <View style={styles.calendar}>
       <DatePicker
         style={{width: 200}}
@@ -49,7 +50,7 @@ export const Calendar = () => {
       </View>
       <View style={styles.buttonContainer} >
       <TouchableOpacity
-          onPress={() => Alert.alert("Simple Button pressed")}
+          onPress={() => search()}
           style={styles.primary}
         >
           <Text style={{textAlign:'center',color:'#ffffff'}}>SEARCH</Text>

@@ -1,10 +1,27 @@
 import { useNavigation } from '@react-navigation/native';
 import React from "react";
-import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 export const Group = ({ item }) => {
   const navigation = useNavigation();
+
+  const deleteGroup = (id) => {
+    console.log("deleting the group with id : "+id )
+  }
+
+  const showAlert = (id) => {
+    Alert.alert(
+      'Confirm Delete',
+      'Are you sure you want to delete this group',
+      [
+        {text: 'Cancel', onPress: () => console.log('Cancel Pressed'), style: 'cancel'},
+        {text: 'OK', onPress: () => deleteGroup(id)},
+      ],
+      { cancelable: false }
+    )
+  }
+
   return (
     <View style={styles.container}>
         <View style={styles.contentContainer}>
@@ -24,7 +41,7 @@ export const Group = ({ item }) => {
         onPress={() => navigation.navigate('EditGroup')}>
           <Text style={{ textAlign: "center", color: "#6100ED" }}>EDIT</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.secondary}>
+        <TouchableOpacity style={styles.secondary} onPress= {() => showAlert(item.id)} >
           <Text style={{ textAlign: "center", color: "#6100ED" }}>DELETE</Text>
         </TouchableOpacity>
       </View>

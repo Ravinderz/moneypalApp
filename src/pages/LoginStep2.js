@@ -1,9 +1,13 @@
+import { useNavigation } from '@react-navigation/native';
 import React from "react";
-import { Alert, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 
 export const LoginStep2 = () => {
   const [value, onChangeText] = React.useState("");
-
+  const navigation = useNavigation();
+  const navigateToDashboard = () => {
+    navigation.navigate('Dashboard');
+  }
   return (
     <View style={styles.container}>
       <Image
@@ -19,7 +23,7 @@ export const LoginStep2 = () => {
           keyboardType='number-pad'
         />
         <TouchableOpacity
-          onPress={() => Alert.alert("Simple Button pressed")}
+          onPress={() => navigateToDashboard()}
           style={styles.primary}
         >
           <Text style={{ textAlign: "center", color: "#ffffff" }}>LOGIN</Text>

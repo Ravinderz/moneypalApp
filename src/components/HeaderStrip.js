@@ -18,10 +18,7 @@ export const HeaderStrip = ({ title, showBackBtn }) => {
       );
     } else {
       return (
-        <MaterialIcons
-          name="arrow-back"
-          style={styles.dummy}
-        ></MaterialIcons>
+        <MaterialIcons name="arrow-back" style={styles.dummy}></MaterialIcons>
       );
     }
   };
@@ -33,7 +30,9 @@ export const HeaderStrip = ({ title, showBackBtn }) => {
       <View style={styles.stripContainer}>
         {displayBtn()}
         <Text style={styles.stripText}>{title}</Text>
-        <Icon name="bell-o" style={styles.goBack}></Icon>
+        <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+          <Icon name="bell-o" style={styles.goBack}></Icon>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -61,8 +60,8 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: "#ffffff"
   },
-  dummy:{
+  dummy: {
     fontSize: 22,
-    color: 'rgba(0, 0, 0, 0.0)'
+    color: "rgba(0, 0, 0, 0.0)"
   }
 });

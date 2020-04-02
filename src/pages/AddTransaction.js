@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DatePicker from 'react-native-datepicker';
 import { Dropdown } from "react-native-material-dropdown";
-import { HeaderStrip } from "../components/HeaderStrip";
 
 let data = [
   {
@@ -63,7 +62,6 @@ export const AddTransaction = () => {
 
   return (
     <View>
-      <HeaderStrip title={title} />
       <View style={styles.container}>
         <View style={styles.buttonContainer}>
           <TextInput
