@@ -9,15 +9,19 @@ import { Dashboard } from "../pages/Dashboard";
 import { EditGroup } from "../pages/EditGroup";
 import { GroupList } from "../pages/GroupList";
 import { Profile } from "../pages/Profile";
+import { HeaderStrip } from "./HeaderStrip";
 const Tab = createMaterialBottomTabNavigator();
 
 const GroupStack = createStackNavigator();
-
+const groupTitle = "Groups";
+const editGroupTitle = "EditGroups";
 function GroupStackScreen() {
   return (
-    <GroupStack.Navigator headerMode="none">
-      <GroupStack.Screen name="Group" component={GroupList} />
-      <GroupStack.Screen name="EditGroup" component={EditGroup} />
+    <GroupStack.Navigator  >
+      <GroupStack.Screen name="Group" component={GroupList} 
+      options={{ header: props => <HeaderStrip {...props} title={groupTitle} showBackBtn={"false"}/> }}/>
+      <GroupStack.Screen name="EditGroup" component={EditGroup} 
+      options={{ header: props => <HeaderStrip {...props} title={editGroupTitle} showBackBtn={"true"}/> }}/>
     </GroupStack.Navigator>
   );
 }

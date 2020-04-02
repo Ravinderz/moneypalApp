@@ -1,7 +1,6 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
-import { HeaderStrip } from "../components/HeaderStrip";
 import { Member } from "../components/Member";
 
 const title = "EditGroup";
@@ -33,7 +32,7 @@ const DATA = [
 export const EditGroup = () => {
   return (
     <View>
-      <HeaderStrip title={title} />
+      
       <View style={styles.container}>
         <Image
           style={styles.groupImg}

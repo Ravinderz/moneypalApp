@@ -1,7 +1,6 @@
 import React from "react";
 import { FlatList, StyleSheet, View } from "react-native";
 import { Group } from "../components/Group";
-import { HeaderStrip } from "../components/HeaderStrip";
 
 const DATA = [
   {
@@ -31,7 +30,7 @@ export const GroupList = () => {
 
   return (
     <View style={styles.container}>
-        <HeaderStrip title={title}/>
+        
       <View style={{marginTop:10}}>
         <FlatList
           data={DATA}

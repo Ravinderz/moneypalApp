@@ -8,7 +8,7 @@ export const Dashboard = () => {
     const title = 'Dashboard';
   return (
     <View style={styles.container}>
-         <HeaderStrip title={title}/>
+         <HeaderStrip title={title} showBackBtn={"false"}/>
         <MoneySpent />
         <TransactionList />
     </View>

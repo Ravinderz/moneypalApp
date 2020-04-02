@@ -1,14 +1,39 @@
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import { TouchableOpacity } from "react-native-gesture-handler";
+import { MaterialIcons } from "react-native-vector-icons";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export const HeaderStrip = ({ title }) => {
+export const HeaderStrip = ({ title, showBackBtn }) => {
+  const displayBtn = () => {
+    if (showBackBtn === "true") {
+      return (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <MaterialIcons
+            name="arrow-back"
+            style={styles.goBack}
+          ></MaterialIcons>
+        </TouchableOpacity>
+      );
+    } else {
+      return (
+        <MaterialIcons
+          name="arrow-back"
+          style={styles.dummy}
+        ></MaterialIcons>
+      );
+    }
+  };
+
+  const navigation = useNavigation();
+
   return (
     <View style={styles.strip}>
       <View style={styles.stripContainer}>
-        <Icon name="navicon" style={styles.hamburger}></Icon>
+        {displayBtn()}
         <Text style={styles.stripText}>{title}</Text>
-        <Icon name="bell-o" style={styles.hamburger}></Icon>
+        <Icon name="bell-o" style={styles.goBack}></Icon>
       </View>
     </View>
   );
@@ -32,8 +57,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#ffffff"
   },
-  hamburger: {
+  goBack: {
     fontSize: 22,
     color: "#ffffff"
+  },
+  dummy:{
+    fontSize: 22,
+    color: 'rgba(0, 0, 0, 0.0)'
   }
 });
