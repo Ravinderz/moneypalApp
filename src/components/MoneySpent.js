@@ -5,7 +5,8 @@ export const MoneySpent = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.textStyle}>Money Spent</Text>
-      <Text style={styles.textStyle}>&#x20B9; 10,000</Text>
+      <Text style={styles.subTextStyle}>till date</Text>
+      <Text style={styles.moneyStyle}>&#x20B9; 10,000</Text>
     </View>
   );
 };
@@ -17,6 +18,17 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   textStyle: {
-    fontSize: 22
+    fontSize: 22,
+    fontFamily:'Roboto'
+  },
+  subTextStyle: {
+    fontSize: 16,
+    color:'#9993A1',
+    fontFamily:'Roboto'
+  },
+  moneyStyle:{
+    fontFamily:'Roboto',
+    color:'#C0392B',
+    fontSize:22
   }
 });
