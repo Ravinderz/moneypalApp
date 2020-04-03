@@ -9,14 +9,24 @@ export const LoginStep2 = () => {
   const [showBtn, setShowBtn] = React.useState(false);
   const navigation = useNavigation();
   const navigateToDashboard = () => {
+    if(!otp || otp.length < 6 ){
+      return;
+    }
     navigation.navigate("Dashboard");
   };
 
   
   const showSubmitBtn = () => {
     console.log(value);
+    if(!value || value.length < 10){
+      return;
+    }
     setShowBtn(true);
   };
+
+  const navigateToRegister = () => {
+    navigation.navigate('Register');
+  }
 
   const AddSubmit = () => {
     console.log(showBtn);
@@ -75,7 +85,8 @@ export const LoginStep2 = () => {
     );
         }else{
           return(
-            <></>
+            <>
+            </>
           );
         }
   }
@@ -90,6 +101,17 @@ export const LoginStep2 = () => {
         {showPhoneField()}
         {AddSubmit()}
       </View>
+      <View style={{flexDirection:'row'}}>
+        <Text>
+          Not a member ?
+          </Text>
+          <TouchableOpacity
+            onPress={() => navigateToRegister()}
+            style={styles.lineTextBtn}
+          >
+            <Text style={styles.loginText}>Register</Text>
+          </TouchableOpacity>
+        </View>
     </View>
   );
 };
@@ -154,5 +176,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 20
+  },
+  loginText: {
+    color: "#c0392b",
+    marginLeft:5,
   }
 });

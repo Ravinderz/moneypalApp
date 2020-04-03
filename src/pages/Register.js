@@ -11,7 +11,7 @@ export const Register = () => {
   };
 
   const navigateToLogin = () => {
-    navigation.navigate("Login");
+    navigation.navigate("OTP");
   };
 
   return (
