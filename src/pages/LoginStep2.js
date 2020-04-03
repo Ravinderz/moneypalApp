@@ -1,13 +1,85 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import React from "react";
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { MaterialIcons } from "react-native-vector-icons";
 
 export const LoginStep2 = () => {
   const [value, onChangeText] = React.useState("");
+  const [otp, setOtp] = React.useState("");
+  const [showBtn, setShowBtn] = React.useState(false);
   const navigation = useNavigation();
   const navigateToDashboard = () => {
-    navigation.navigate('Dashboard');
+    navigation.navigate("Dashboard");
+  };
+
+  
+  const showSubmitBtn = () => {
+    console.log(value);
+    setShowBtn(true);
+  };
+
+  const AddSubmit = () => {
+    console.log(showBtn);
+    if (showBtn) {
+      return (
+        <View>
+          <TextInput
+            style={styles.OTP}
+            placeholder="OTP"
+            onChangeText={text => setOtp(text)}
+            value={otp}
+            maxLength={6}
+            keyboardType="number-pad"
+          />
+          <View style={{width:155}}>
+          <TouchableOpacity
+            onPress={() => navigateToDashboard()}
+            style={styles.submit}
+          >
+            <Text
+              style={{ textAlign: "center", color: "#ffffff", fontSize: 18 }}
+            >
+              SUBMIT
+            </Text>
+          </TouchableOpacity>
+          </View>
+        </View>
+      );
+    }
+  };
+
+  const showPhoneField = () => {
+
+    if(!showBtn){
+    return(
+      <View
+          style={{
+            flexDirection: "row",
+            justifyContent: "space-between",
+            width: "100%"
+          }}
+        >
+          <Text style={styles.numberStart}>+91 -</Text>
+          <TextInput
+            style={styles.inputText}
+            placeholder="Enter phone number"
+            onChangeText={text => onChangeText(text)}
+            value={value}
+            maxLength={10}
+            keyboardType="number-pad"
+          />
+          <TouchableOpacity onPress={() => showSubmitBtn()} style={styles.done}>
+            <MaterialIcons name="done" size={26} color={"#fff"} />
+          </TouchableOpacity>        
+        </View>
+    );
+        }else{
+          return(
+            <></>
+          );
+        }
   }
+
   return (
     <View style={styles.container}>
       <Image
@@ -15,19 +87,8 @@ export const LoginStep2 = () => {
         source={require("../assets/images/logo_transparent.png")}
       />
       <View style={styles.buttonContainer}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Enter phone number"
-          onChangeText={text => onChangeText(text)}
-          value={value}
-          keyboardType='number-pad'
-        />
-        <TouchableOpacity
-          onPress={() => navigateToDashboard()}
-          style={styles.primary}
-        >
-          <Text style={{ textAlign: "center", color: "#ffffff" }}>LOGIN</Text>
-        </TouchableOpacity>
+        {showPhoneField()}
+        {AddSubmit()}
       </View>
     </View>
   );
@@ -35,10 +96,10 @@ export const LoginStep2 = () => {
 
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 100,
     backgroundColor: "#ffffff",
     alignItems: "center",
-    justifyContent: "center"
+    justifyContent: "center",
+    flex: 1
   },
   logo: {
     height: 300,
@@ -56,13 +117,42 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     borderRadius: 5
   },
+  submit:{
+    padding: 15,
+    width: "100%",
+    backgroundColor: "#6200EE",
+    marginBottom: 20,
+    borderRadius: 5,
+  },
   inputText: {
     height: 40,
-    borderColor: "#3F1280",
-    borderWidth: 1,
-    width: "100%",
-    borderRadius:5,
-    marginBottom:20,
-    paddingLeft:15
+    borderBottomColor: "#3F1280",
+    borderBottomWidth: 1,
+    borderRadius: 5,
+    marginBottom: 20,
+    fontSize: 18,
+    letterSpacing:3
+  },
+  OTP:{
+    height: 40,
+    borderBottomColor: "#3F1280",
+    borderBottomWidth: 1,
+    marginBottom: 20,
+    fontSize: 18,
+    letterSpacing:15
+  },
+  numberStart: {
+    marginTop: 8,
+    fontSize: 18
+  },
+  done: {
+    marginTop: 8,
+    fontSize: 18,
+    width: 40,
+    height: 40,
+    backgroundColor: "#6200EE",
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 20
   }
 });

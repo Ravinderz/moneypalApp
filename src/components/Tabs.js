@@ -1,4 +1,4 @@
-import { createMaterialBottomTabNavigator } from "@react-navigation/material-bottom-tabs";
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { MaterialCommunityIcons, MaterialIcons } from "react-native-vector-icons";
@@ -11,8 +11,11 @@ import { Login } from "../pages/Login";
 import { LoginStep2 } from "../pages/LoginStep2";
 import { Notifications } from "../pages/Notifications";
 import { Profile } from "../pages/Profile";
+import { Register } from "../pages/Register";
 import { HeaderStrip } from "./HeaderStrip";
-const Tab = createMaterialBottomTabNavigator();
+//const Tab = createMaterialBottomTabNavigator();
+const Tab = createBottomTabNavigator();
+
 
 const DashboardStack = createStackNavigator();
 const DashboardTitle = "Dashboard";
@@ -215,10 +218,17 @@ const Tabs = () => {
   return (
         <Tab.Navigator
           initialRouteName="Dashboard"
-          activeColor="#ffffff"
-          inactiveColor="#B180F6"
           labelStyle={{ fontSize: 12 }}
           barStyle={{ backgroundColor: "#6200EE" }}
+         tabBarOptions={{
+        activeTintColor: '#e91e63',
+        inactiveTintColor:'#B180F6',
+        activeTintColor:'#fff',
+        style: {
+          backgroundColor: '#6200EE',
+        },
+      }}
+          
         >
           <Tab.Screen
             name="Dashboard"
@@ -293,6 +303,9 @@ export const RootNav = () => {
         headerShown: false
       }}/>
     <RootStack.Screen name="OTP" component={LoginStep2} options={{
+        headerShown: false
+      }}/>
+      <RootStack.Screen name="Register" component={Register} options={{
         headerShown: false
       }}/>
     <RootStack.Screen name="Dashboard" component={Tabs} />

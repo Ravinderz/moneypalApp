@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from "react";
-import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 
 
@@ -10,6 +10,9 @@ export const Login = () => {
 
 const navigateToOTP = () => {
   navigation.navigate('OTP');
+}
+const navigateToRegister = () => {
+  navigation.navigate('Register');
 }
 
   return (
@@ -26,7 +29,7 @@ const navigateToOTP = () => {
           <Text style={{textAlign:'center',color:'#ffffff'}}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => Alert.alert("Simple Button pressed")}
+          onPress={() => navigateToRegister()}
           style={styles.secondary}
         >
           <Text style={{textAlign:'center',color:'#6100ED'}} >REGISTER</Text>
