@@ -211,9 +211,6 @@ function ProfileStackScreen() {
   );
 }
 
-const RootStack = createStackNavigator();
-
-
 const Tabs = () => {
   return (
         <Tab.Navigator
@@ -295,6 +292,8 @@ const Tabs = () => {
         </Tab.Navigator>
   );
 };
+
+const RootStack = createStackNavigator();
 
 export const RootNav = () => {
   return (

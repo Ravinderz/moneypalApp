@@ -12,7 +12,7 @@ export const LoginStep2 = () => {
     if(!otp || otp.length < 6 ){
       return;
     }
-    navigation.navigate("Dashboard");
+    navigation.replace("Dashboard");
   };
 
   
