@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DatePicker from 'react-native-datepicker';
 import { Dropdown } from "react-native-material-dropdown";
+import { db } from '../dbConfig';
 
 let data = [
   {
@@ -33,6 +34,19 @@ export const AddTransaction = () => {
 
   const submitTransaction = () =>{
     console.log(value, amount , transactionType ,selectedgroup, transactionDate);
+    db.ref('/transactions').push({
+      title: value,
+      amount,
+      transactionType,
+      selectedgroup,
+      transactionDate
+    });
+    Alert.alert('Action!', 'Transaction has been added successfully');
+    onChangeText("");
+    setAmount("");
+    setTransactionType("Self");
+    setSelectedGroup("");
+    setTransactionDate("");
   }
 
   const onTransactionTypeSelection = (transactionType) =>{

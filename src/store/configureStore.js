@@ -1,4 +1,5 @@
-import { combineReducers, createStore } from "redux";
+import { applyMiddleware, combineReducers, createStore } from "redux";
+import thunk from 'redux-thunk';
 import dashboardReducer from "./reducers/dashboardReducer";
 import notificationsReducer from "./reducers/notificationReducer";
 const rootReducer = combineReducers({
@@ -6,7 +7,7 @@ const rootReducer = combineReducers({
   notifications: notificationsReducer
 });
 const configureStore = () => {
-  return createStore(rootReducer);
+  return createStore(rootReducer,applyMiddleware(thunk));
 };
 export default configureStore;
 

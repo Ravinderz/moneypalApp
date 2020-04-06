@@ -6,6 +6,7 @@ import { RootNav } from "./src/components/Tabs";
 import configureStore from "./src/store/configureStore";
 
 
+
 const store = configureStore();
 
 export default function App() {

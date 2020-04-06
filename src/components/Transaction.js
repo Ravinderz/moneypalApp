@@ -10,7 +10,7 @@ export const Transaction = ({item}) => {
         <Text style={styles.lineOneText}>&#x20B9;{item.amount}</Text>
       </View>
       <View>
-        <Text style={styles.date}>{item.date}</Text>
+        <Text style={styles.date}>{item.transactionDate}</Text>
       </View>
     </View>
   );
