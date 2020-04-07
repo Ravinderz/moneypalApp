@@ -29,7 +29,10 @@ const DATA = [
   
 ];
 
-export const EditGroup = () => {
+export const EditGroup = ({route, navigation}) => {
+
+  const {group} = route.params;
+  console.log(group);
   return (
     <View>
       
@@ -39,9 +42,9 @@ export const EditGroup = () => {
           source={require("../assets/images/group_img.png")}
         />
         <View style={styles.textContainer}>        
-        <Text style={styles.name}>Our New Adda</Text>
+        <Text style={styles.name}>{group.title}</Text>
         <Text style={styles.tags}>Roomies . Friends . Group</Text>
-        <Text style={styles.desc}>Group for roommates expenses</Text>
+        <Text style={styles.desc}>{group.description}</Text>
         </View>
         <View style={styles.MembersContainer}>
           <Text style={styles.heading}>Members</Text>
@@ -50,7 +53,6 @@ export const EditGroup = () => {
           data={DATA}
           contentContainerStyle={{
             flexDirection: 'row',
-            flexWrap: 'wrap'
             }}
           renderItem={({ item }) => <Member item={item} />}
           keyExtractor={item => item.id}

@@ -2,6 +2,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import React from "react";
 import { MaterialCommunityIcons, MaterialIcons } from "react-native-vector-icons";
+import { AddGroup } from "../pages/AddGroup";
 import { AddTransaction } from "../pages/AddTransaction";
 import { Calendar } from "../pages/Calendar";
 import { Dashboard } from "../pages/Dashboard";
@@ -57,6 +58,7 @@ function DashboardStackScreen() {
 const GroupStack = createStackNavigator();
 const groupTitle = "Groups";
 const editGroupTitle = "EditGroups";
+const addGroupTitle = "AddGroup";
 function GroupStackScreen() {
   return (
     <GroupStack.Navigator>
@@ -90,6 +92,20 @@ function GroupStackScreen() {
             <HeaderStrip
               {...props}
               title={editGroupTitle}
+              showBackBtn={"true"}
+            />
+          ),
+        }}
+      />
+      <GroupStack.Screen
+        name="AddGroup"
+        component={AddGroup}
+        options={{
+          header: (props) => (
+            <HeaderStrip
+              {...props}
+              title={addGroupTitle}
+              rightBtn = {"check"}
               showBackBtn={"true"}
             />
           ),

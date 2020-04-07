@@ -5,7 +5,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons } from "react-native-vector-icons";
 import Icon from "react-native-vector-icons/FontAwesome";
 
-export const HeaderStrip = ({ title, showBackBtn }) => {
+export const HeaderStrip = ({ title, showBackBtn,rightBtn }) => {
   const displayBtn = () => {
     if (showBackBtn === "true") {
       return (
@@ -23,16 +23,19 @@ export const HeaderStrip = ({ title, showBackBtn }) => {
     }
   };
 
-  const navigation = useNavigation();
+   const navigation = useNavigation();
 
   return (
     <View style={styles.strip}>
       <View style={styles.stripContainer}>
         {displayBtn()}
         <Text style={styles.stripText}>{title}</Text>
-        <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
+        {rightBtn === 'check' ? <TouchableOpacity onPress={() => console.log('add group')}>
+         <Icon name="check" style={styles.goBack}></Icon>
+       </TouchableOpacity> :  <TouchableOpacity onPress={() => navigation.navigate('Notifications')}>
           <Icon name="bell-o" style={styles.goBack}></Icon>
         </TouchableOpacity>
+         }
       </View>
     </View>
   );

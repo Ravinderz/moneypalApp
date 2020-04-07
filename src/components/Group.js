@@ -6,6 +6,8 @@ import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-na
 export const Group = ({ item }) => {
   const navigation = useNavigation();
 
+  console.log(item);
+
   const deleteGroup = (id) => {
     console.log("deleting the group with id : "+id )
   }
@@ -38,7 +40,7 @@ export const Group = ({ item }) => {
       </View>
       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.secondary}
-        onPress={() => navigation.navigate('EditGroup')}>
+        onPress={() => navigation.navigate('EditGroup',{group:item})}>
           <Text style={{ textAlign: "center", color: "#6100ED" }}>EDIT</Text>
         </TouchableOpacity>
         <TouchableOpacity style={styles.secondary} onPress= {() => showAlert(item.id)} >

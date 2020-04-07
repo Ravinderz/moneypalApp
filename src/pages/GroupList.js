@@ -24,17 +24,18 @@ const DATA = [
   
 ];
 
-export const GroupList = () => {
+export const GroupList = ({navigation}) => {
 
   const title = 'Groups';
 
   const navigateToAddGroup =() => {
     console.log("navigate to add group");
+    navigation.navigate('AddGroup');
   }
 
   return (
     <View style={styles.container}>
-      <View styule={styles.btnContainer}>
+      <View style={styles.btnContainer}>
       <TouchableOpacity
           onPress={() => navigateToAddGroup()}
           style={styles.secondary}
@@ -42,7 +43,7 @@ export const GroupList = () => {
           <Text style={{textAlign:'center',color:'#6100ED'}} >ADD GROUP</Text>
         </TouchableOpacity>
       </View>
-      <View style={{marginTop:10}}>
+      <View style={{height:"80%"}}>
         <FlatList
           data={DATA}
           renderItem={({ item }) => <Group item={item} />}
@@ -67,7 +68,6 @@ const styles = StyleSheet.create({
     borderRadius:5
   },
   btnContainer:{
-    marginTop:15,
-    marginBottom:15
+    margin:15
   }
 });

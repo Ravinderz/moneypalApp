@@ -1,16 +1,40 @@
 import { useNavigation } from "@react-navigation/native";
-import React from "react";
-import { Image, StyleSheet, Text, View } from "react-native";
+import * as Contacts from "expo-contacts";
+import React, { useEffect } from "react";
+import { Alert, Image, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons } from "react-native-vector-icons";
 
 export const Member = ({ item }) => {
   const navigation = useNavigation();
 
+  useEffect(() => {
+    (async () => {
+     
+      const { Contactstatus } = await Contacts.requestPermissionsAsync();
+      if (Contactstatus !== "granted") {
+        Alert.alert(
+          "Sorry, we need contacts permissions to make this work!"
+        );
+      }
+    })();
+  }, []);
+
+  const addContact = async () => {
+    const { data } = await Contacts.getContactsAsync({
+      fields: [Contacts.Fields.Emails],
+    });
+    
+    if (data.length > 0) {
+      const contact = data[0];
+      console.log(contact);
+    }
+  }
+
   if (item.name === "new") {
     return (
       <View>
-          <TouchableOpacity style={styles.iconContainer}>
+          <TouchableOpacity style={styles.iconContainer} onPress={() => addContact()}>
         <MaterialIcons name="add-circle" color="#03DAC6" size={55} />
         <Text>Add</Text>
         </TouchableOpacity>
