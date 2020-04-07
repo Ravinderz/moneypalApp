@@ -2,7 +2,9 @@ import React from "react";
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import DatePicker from 'react-native-datepicker';
 import { Dropdown } from "react-native-material-dropdown";
+import { useDispatch, useSelector } from "react-redux";
 import { db } from '../dbConfig';
+import * as actions from "../store/actions/dashboardActions";
 
 let data = [
   {
@@ -25,6 +27,9 @@ let group = [
 
 
 export const AddTransaction = () => {
+
+  const dispatch = useDispatch();
+
   const [value, onChangeText] = React.useState("");
   const [amount, setAmount] = React.useState("");
   const [transactionDate,setTransactionDate] = React.useState("");
@@ -32,9 +37,11 @@ export const AddTransaction = () => {
   const [selectedgroup, setSelectedGroup] = React.useState("");
   const title = "Add Transaction";
 
+  let userId = useSelector((state) => state.auth.userId);
+
   const submitTransaction = () =>{
     console.log(value, amount , transactionType ,selectedgroup, transactionDate);
-    db.ref('/transactions').push({
+    db.ref(`/transactions/${userId}`).push({
       title: value,
       amount,
       transactionType,
@@ -47,6 +54,7 @@ export const AddTransaction = () => {
     setTransactionType("Self");
     setSelectedGroup("");
     setTransactionDate("");
+    dispatch(actions.getRecentTransactions(userId));
   }
 
   const onTransactionTypeSelection = (transactionType) =>{

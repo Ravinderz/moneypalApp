@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, Text, View } from "react-native";
+import NumberFormat from "react-number-format";
 
 
 export const Transaction = ({item}) => {
@@ -7,7 +8,14 @@ export const Transaction = ({item}) => {
     <View style={styles.container} >
       <View style={styles.lineOne}>
         <Text style={styles.lineOneText}>{item.title}</Text>
-        <Text style={styles.lineOneText}>&#x20B9;{item.amount}</Text>
+        <NumberFormat
+        value={item.amount}
+        displayType={"text"}
+        thousandSeparator={true}
+        thousandsGroupStyle="lakh"
+        prefix={"₹"}
+        renderText={(value) => <Text style={styles.moneyStyle}>{value}</Text>}
+      />
       </View>
       <View>
         <Text style={styles.date}>{item.transactionDate}</Text>

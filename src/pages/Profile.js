@@ -1,14 +1,16 @@
 import { StackActions, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { useDispatch } from 'react-redux';
 import { ProfileCard } from "../components/ProfileCard";
+import * as actions from '../store/actions/authActions';
 
 export const Profile = () => {
   const navigation = useNavigation();
-
+  const dispatch = useDispatch();
   const logout = () => {
     console.log("logout pressed");
-
+    dispatch(actions.logout());
     navigation.dispatch(StackActions.popToTop());
   };
 

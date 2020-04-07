@@ -1,14 +1,13 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useDispatch } from 'react-redux';
 import * as actions from '../store/actions/authActions';
 
 
-export const Register = () => {
-  const [name, onChangeText] = React.useState("");
-  const [phone, setPhone] = React.useState("");
+export const LoginEmail = () => {
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
@@ -16,15 +15,15 @@ export const Register = () => {
 
   const dispatch = useDispatch();
 
-  const navigateToOTP = async () => {
+  const navigateToDashboard = async () => {
     setIsLoading(true);
-    await dispatch(actions.signup(email,password));
+    await dispatch(actions.signin(email,password));
     setIsLoading(false);
     navigation.navigate("Dashboard");
   };
 
-  const navigateToLogin = () => {
-    navigation.navigate("OTP");
+  const navigateToRegister = () => {
+    navigation.navigate("Register");
   };
 
   return (
@@ -34,14 +33,7 @@ export const Register = () => {
         source={require("../assets/images/logo_transparent.png")}
       />
       <View style={styles.buttonContainer}>
-        <TextInput
-          style={styles.inputText}
-          placeholder="Enter Name"
-          onChangeText={text => onChangeText(text)}
-          value={name}
-          keyboardType="default"
-        />
-        <TextInput
+               <TextInput
           style={styles.inputText}
           placeholder="Enter email"
           onChangeText={text => setEmail(text)}
@@ -62,24 +54,25 @@ export const Register = () => {
           value={phone}
           keyboardType="number-pad"
         /> */}
-         {isLoading ? <ActivityIndicator size="large"/>
-        :<TouchableOpacity
-          onPress={() => navigateToOTP()}
+        {isLoading ? <ActivityIndicator size="large"/>
+        :
+        <TouchableOpacity
+          onPress={() => navigateToDashboard()}
           style={styles.primary}
         >
           <Text style={{ textAlign: "center", color: "#ffffff" }}>
-            REGISTER
+            LOGIN
           </Text>
-      </TouchableOpacity> }
+        </TouchableOpacity>}
         <View style={{flexDirection:'row'}}>
         <Text>
-          Already a member ?
+          Not a member ?
           </Text>
           <TouchableOpacity
-            onPress={() => navigateToLogin()}
+            onPress={() => navigateToRegister()}
             style={styles.lineTextBtn}
           >
-            <Text style={styles.loginText}>Login</Text>
+            <Text style={styles.loginText}>Register</Text>
           </TouchableOpacity>
         </View>
       </View>

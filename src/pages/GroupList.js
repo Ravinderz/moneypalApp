@@ -1,5 +1,5 @@
 import React from "react";
-import { FlatList, StyleSheet, View } from "react-native";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { Group } from "../components/Group";
 
 const DATA = [
@@ -28,9 +28,20 @@ export const GroupList = () => {
 
   const title = 'Groups';
 
+  const navigateToAddGroup =() => {
+    console.log("navigate to add group");
+  }
+
   return (
     <View style={styles.container}>
-        
+      <View styule={styles.btnContainer}>
+      <TouchableOpacity
+          onPress={() => navigateToAddGroup()}
+          style={styles.secondary}
+        >
+          <Text style={{textAlign:'center',color:'#6100ED'}} >ADD GROUP</Text>
+        </TouchableOpacity>
+      </View>
       <View style={{marginTop:10}}>
         <FlatList
           data={DATA}
@@ -46,5 +57,17 @@ const styles = StyleSheet.create({
   container: {
     width: "100%",
     marginBottom: 25
+  },
+  secondary:{
+    padding: 15,
+    width:'100%',
+    borderStyle:'solid',
+    borderColor:'#3F1280',
+    borderWidth:2,
+    borderRadius:5
+  },
+  btnContainer:{
+    marginTop:15,
+    marginBottom:15
   }
 });

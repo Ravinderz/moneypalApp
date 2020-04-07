@@ -1,16 +1,20 @@
-import { db } from '../../dbConfig';
 
 export const GET_SPENDINGS_OF_MONTH = "GET_SPENDINGS_OF_MONTH";
 export const GET_RECENT_TEN_TRANSACTIONS = "GET_RECENT_TEN_TRANSACTIONS";
 
-export const getRecentTransactions = () => {
-  
-  return dispatch => {
-  db.ref('/transactions').on('value', querySnapShot => {
-    
-      let data = querySnapShot.val() ? querySnapShot.val() : {};
-      console.log(data);  
-      const keys = Object.keys(data);  
+export const getRecentTransactions = (userId) => {
+
+
+  return async dispatch => {
+    const response = await fetch(
+      `https://moneypalapp.firebaseio.com/transactions/${userId}.json`);
+    console.log(response.ok);
+    if (!response.ok) {
+      throw new Error("something went wrong !");
+    }
+    const data = await response.json();
+    console.log(data);
+    const keys = Object.keys(data);  
       let dbData = [];
       keys.map(key => {
         dbData.push({
@@ -22,11 +26,11 @@ export const getRecentTransactions = () => {
           selectedGroup : data[key].selectedGroup
         })
       })
-      console.log(dbData);
-      dispatch(getRecentTenTransactions(dbData));
+    dispatch({
+      type: GET_RECENT_TEN_TRANSACTIONS,
+      payload: {dbData: dbData, userId: userId }
     });
-    };
-
+  };
 }
 
 export const getSpendingsOfMonth = (userId) => {
@@ -38,11 +42,11 @@ export const getSpendingsOfMonth = (userId) => {
   };
 };
 
-export const getRecentTenTransactions = (dbData) => {
+export const getRecentTenTransactions = (dbData,userId) => {
   return (dispatch) => {
     dispatch({
       type: GET_RECENT_TEN_TRANSACTIONS,
-      payload: dbData,
+      payload: {dbData: dbData, userId: userId },
     });
   };
 };
