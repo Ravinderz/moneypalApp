@@ -17,9 +17,7 @@ export const Login = () => {
     const checkLoggedIn  = async () => {
      let userData = await AsyncStorage.getItem('userData');
      let parsedData = JSON.parse(userData);
-      console.log(parsedData);
       if(parsedData){
-        console.log("inside if");
         navigation.navigate('Dashboard');
         dispatch(actions.SIGNIN,userData.displayName,
           userData.email,

@@ -47,7 +47,6 @@ export const signin = (email, password) => {
         }),
       }
     );
-    console.log(response.ok);
     if (!response.ok) {
       throw new Error("something went wrong !");
     }

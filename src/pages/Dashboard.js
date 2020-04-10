@@ -12,10 +12,8 @@ export const Dashboard = () => {
   let data = [];
   useEffect(() => {
     const loading = async () => {
-      
       let userData = await AsyncStorage.getItem('userData');
       let parsedData = JSON.parse(userData);
-      console.log("userId",parsedData.userId);
       await dispatch(actions.getRecentTransactions(parsedData.userId));
       setIsLoaded(true);
     };

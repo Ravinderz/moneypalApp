@@ -5,8 +5,10 @@ import { MaterialCommunityIcons, MaterialIcons } from "react-native-vector-icons
 import { AddGroup } from "../pages/AddGroup";
 import { AddTransaction } from "../pages/AddTransaction";
 import { Calendar } from "../pages/Calendar";
+import { AllContacts } from "../pages/Contacts";
 import { Dashboard } from "../pages/Dashboard";
 import { EditGroup } from "../pages/EditGroup";
+import { EditMembers } from "../pages/EditMembersList";
 import { GroupList } from "../pages/GroupList";
 import { Login } from "../pages/Login";
 import { LoginEmail } from "../pages/LoginEmail";
@@ -57,8 +59,10 @@ function DashboardStackScreen() {
 
 const GroupStack = createStackNavigator();
 const groupTitle = "Groups";
-const editGroupTitle = "EditGroups";
-const addGroupTitle = "AddGroup";
+const editGroupTitle = "Edit Groups";
+const addGroupTitle = "Add Group";
+const contactsTitle = "Contacts";
+const editGroupMemberTitle = "Edit Members";
 function GroupStackScreen() {
   return (
     <GroupStack.Navigator>
@@ -98,6 +102,20 @@ function GroupStackScreen() {
         }}
       />
       <GroupStack.Screen
+        name="EditMembers"
+        component={EditMembers}
+        options={{
+          header: (props) => (
+            <HeaderStrip
+              {...props}
+              title={editGroupMemberTitle}
+              rightBtn = {"check"}
+              showBackBtn={"true"}
+            />
+          ),
+        }}
+      />
+      <GroupStack.Screen
         name="AddGroup"
         component={AddGroup}
         options={{
@@ -105,6 +123,20 @@ function GroupStackScreen() {
             <HeaderStrip
               {...props}
               title={addGroupTitle}
+              rightBtn = {"check"}
+              showBackBtn={"true"}
+            />
+          ),
+        }}
+      />
+      <GroupStack.Screen
+        name="AllContacts"
+        component={AllContacts}
+        options={{
+          header: (props) => (
+            <HeaderStrip
+              {...props}
+              title={contactsTitle}
               rightBtn = {"check"}
               showBackBtn={"true"}
             />

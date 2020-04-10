@@ -32,7 +32,7 @@ const DATA = [
 export const EditGroup = ({route, navigation}) => {
 
   const {group} = route.params;
-  console.log(group);
+
   return (
     <View>
       

@@ -7,7 +7,6 @@ export const MoneySpent = () => {
   let spendingTillDate = 0;
 
   let transactions = useSelector((state) => state.dashboard.recentTransactions);
-  console.log(transactions);
   transactions.map((a) => {
     let date = new Date();
     let currentDate = new Date(date.getFullYear(), date.getMonth(), 2);

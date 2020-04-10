@@ -4,19 +4,19 @@ import { Group } from "../components/Group";
 
 const DATA = [
   {
-    id: 1,
+    id: 'G1',
     title: "Our New Adda",
     description: "A group for the roomies",
     picture: "../assets/images/groupone.png"
   },
   {
-    id: 2,
+    id: 'G2',
     title: "Office bunch",
     description: "Office gang",
     picture: "../assets/images/grouptwo.png"
   },
   {
-    id: 3,
+    id: 'G3',
     title: "Tea time",
     description: "Tea time",
     picture: "../assets/images/groupthree.png"

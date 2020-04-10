@@ -35,8 +35,7 @@ export const AddTransaction = () => {
   const [transactionDate,setTransactionDate] = React.useState("");
   const [transactionType, setTransactionType] = React.useState("");
   const [selectedgroup, setSelectedGroup] = React.useState("");
-  const title = "Add Transaction";
-
+  
   let userId = useSelector((state) => state.auth.userId);
 
   const submitTransaction = () =>{

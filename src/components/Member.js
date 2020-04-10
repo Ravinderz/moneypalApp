@@ -1,34 +1,18 @@
 import { useNavigation } from "@react-navigation/native";
-import * as Contacts from "expo-contacts";
-import * as Permissions from 'expo-permissions';
-import React, { useEffect } from "react";
-import { Alert, Image, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Image, StyleSheet, Text, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { MaterialIcons } from "react-native-vector-icons";
+import { useDispatch, useSelector } from "react-redux";
+import * as actions from "../store/actions/groupActions";
 
-export const Member = ({ item }) => {
+export const Member = ({ item,groupData }) => {
   const navigation = useNavigation();
-
-  useEffect(() => {
-    (async () => {
-     
-      const { Contactstatus } = await Permissions.askAsync(Permissions.CONTACTS);
-      if (Contactstatus !== "granted") {
-        Alert.alert(
-          "Sorry, we need contacts permissions to make this work!"
-        );
-      }
-    })();
-  }, []);
-
-  const addContact = async () => {
-    console.log("inside add contact")
-    const { data } = await Contacts.getContactsAsync();
-    console.log(data);
-    if (data.length > 0) {
-      const contact = data[0];
-      console.log(contact);
-    }
+  const dispatch = useDispatch();
+  let userId = useSelector((state) => state.auth.userId);
+  const addContact = async () => { 
+    await dispatch(actions.storeGroup(groupData.title,groupData.desc,userId,groupData.members,groupData.image));
+    navigation.navigate('AllContacts');
   }
 
   if (item.name === "new") {
@@ -36,7 +20,7 @@ export const Member = ({ item }) => {
       <View>
           <TouchableOpacity style={styles.iconContainer} onPress={() => addContact()}>
         <MaterialIcons name="add-circle" color="#03DAC6" size={55} />
-        <Text>Add</Text>
+        <Text style={{flexWrap: 'wrap'}}>Add</Text>
         </TouchableOpacity>
       </View>
     );

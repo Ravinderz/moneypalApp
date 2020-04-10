@@ -6,8 +6,6 @@ import { Alert, Image, StyleSheet, Text, TouchableOpacity, View } from "react-na
 export const Group = ({ item }) => {
   const navigation = useNavigation();
 
-  console.log(item);
-
   const deleteGroup = (id) => {
     console.log("deleting the group with id : "+id )
   }

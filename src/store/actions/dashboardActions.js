@@ -8,12 +8,10 @@ export const getRecentTransactions = (userId) => {
   return async dispatch => {
     const response = await fetch(
       `https://moneypalapp.firebaseio.com/transactions/${userId}.json`);
-    console.log(response.ok);
     if (!response.ok) {
       throw new Error("something went wrong !");
     }
     const data = await response.json();
-    console.log(data);
     const keys = Object.keys(data);  
       let dbData = [];
       keys.map(key => {

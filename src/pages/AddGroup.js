@@ -3,27 +3,21 @@ import * as Permissions from 'expo-permissions';
 import React, { useEffect } from "react";
 import { Image, StyleSheet, Text, TextInput, View } from "react-native";
 import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
+import { SafeAreaView } from "react-native-safe-area-context";
 import { MaterialIcons } from "react-native-vector-icons";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Member } from "../components/Member";
+import * as actions from "../store/actions/groupActions";
 
-const title = "EditGroup";
-
-const DATA = [
-  {
-    id: 4,
-    name: "new",
-    picture: "../assets/images/groupthree.png",
-  },
-];
-
-export const AddGroup = ({ navigation }) => {
+export const AddGroup = ({ navigation,route }) => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = React.useState("");
   const [desc, setDesc] = React.useState("");
   const [image, setImage] = React.useState(null);
-
+  
+  let groupData =  useSelector(state => state.groups.group);
+  
   useEffect(() => {
     (async () => {
       const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -32,8 +26,29 @@ export const AddGroup = ({ navigation }) => {
           "Sorry, we need camera roll permissions to make this work!"
         );
       }
+      
     })();
   }, []);
+  
+  const dispatchAddGroupAction = (type,data) =>{
+    dispatch(actions.addGroup(type,data))
+  }
+
+
+  let storedContacts = useSelector(state => state.contact);
+  if(storedContacts && storedContacts.length > 0){
+    dispatchAddGroupAction('members',storedContacts);
+  }
+  let storedGroupData = useSelector(state => state.groups.group);
+
+  
+  setGroupTitle = (title) => {
+    setTitle(title);
+  }
+
+  setGroupDesc = (desc) => {
+    setDesc(desc);    
+  }
 
   pickImage = async () => {
     let result = await ImagePicker.launchImageLibraryAsync({
@@ -42,13 +57,17 @@ export const AddGroup = ({ navigation }) => {
       aspect: [4, 3],
       quality: 1,
     });
-
-    console.log(result);
-
     if (!result.cancelled) {
       setImage(result.uri);
+      dispatchAddGroupAction('image',result.uri);
     }
   };
+
+  const editMembers = (item) => {
+    navigation.navigate('EditMembers');
+  };
+
+  
 
   return (
     <View style={styles.container}>
@@ -65,7 +84,8 @@ export const AddGroup = ({ navigation }) => {
         <TextInput
           style={styles.inputText}
           placeholder="Enter Group title"
-          onChangeText={(text) => setTitle(text)}
+          onChangeText={(text) => setGroupTitle(text)}
+          onBlur={() => dispatchAddGroupAction('title',title)}
           value={title}
           keyboardType="default"
         />
@@ -73,23 +93,29 @@ export const AddGroup = ({ navigation }) => {
         <TextInput
           style={styles.inputText}
           placeholder="Enter Group Description"
-          onChangeText={(text) => setDesc(text)}
+          onChangeText={(text) => setGroupDesc(text)}
+          onBlur={() => dispatchAddGroupAction('desc',desc)}
           value={desc}
           keyboardType="default"
         />
       </View>
       <View style={styles.MembersContainer}>
+        <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={styles.heading}>Members</Text>
-        <View style={styles.memberContentContainer}>
+        <TouchableOpacity onPress={() => editMembers()}>
+        <Text style={styles.heading}>Edit</Text>
+        </TouchableOpacity>
+        </View>
+        <SafeAreaView style={styles.memberContentContainer}>
           <FlatList
-            data={DATA}
+            data={storedContacts}
             contentContainerStyle={{
-              flexDirection: "row",
+              flexDirection: "row"              
             }}
-            renderItem={({ item }) => <Member item={item} />}
+            renderItem={({ item }) => <Member item={item} groupData={groupData}/>}
             keyExtractor={(item) => item.id}
           />
-        </View>
+        </SafeAreaView>
       </View>
     </View>
   );
@@ -146,4 +172,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
+  removeBtn:{
+    alignItems:'flex-end',
+    marginBottom:-12
+  }
 });
