@@ -66,11 +66,11 @@ export const signin = (email, password) => {
 };
 
 export const logout = (email, password) => {
+  AsyncStorage.removeItem('userData');
     return async (dispatch) => {
       dispatch({
         type: LOGOUT
       });
-      AsyncStorage.removeItem('userData');
     };
   };
 

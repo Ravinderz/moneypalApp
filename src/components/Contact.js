@@ -1,29 +1,18 @@
 import React from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
 import { useDispatch } from "react-redux";
-import * as actions from '../store/actions/contactActions';
 
 export const Contact = ({ item, showRemoveBtn }) => {
 
   const dispatch = useDispatch();
 
-  const removeMember = () => {
-    console.log(item);
-    console.log("removeMember");
-    dispatch(actions.removeContact(item.id));
-  }
-
-
-
+ 
   if (item.name !== "new") {
     return (
       <View
         style={{
           flexDirection: "row",
           justifyContent: "space-between",
-          borderBottomWidth: 1,
-          borderBottomColor: "#ecf0f1",
         }}
       >
         <View style={styles.container}>
@@ -40,15 +29,7 @@ export const Contact = ({ item, showRemoveBtn }) => {
             </Text>
           </View>
         </View>
-        {showRemoveBtn ? (
-          <View style={styles.removeBtn}>
-            <TouchableOpacity onPress={() => removeMember()}>
-              <Text style={{color:'#fff',fontFamily:'Roboto',fontSize:16}}>Remove</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <></>
-        )}
+      
       </View>
     );
   } else {

@@ -30,6 +30,26 @@ export const AddTransaction = () => {
 
   const dispatch = useDispatch();
 
+  const [allContactsList, setAllContactsList] = useState([]);
+
+  useEffect(() => {
+    (async () => {
+      const { Contactstatus } = await Permissions.askAsync(
+        Permissions.CONTACTS
+      );
+      if (Contactstatus !== "granted") {
+        Alert.alert("Sorry, we need contacts permissions to make this work!");
+      }
+
+      const { data } = await Contacts.getContactsAsync();
+      if (data.length > 0) {
+        setAllContactsList(data);
+      }
+      setIsLoaded(true);
+    })();
+  }, []);
+
+
   const [value, onChangeText] = React.useState("");
   const [amount, setAmount] = React.useState("");
   const [transactionDate,setTransactionDate] = React.useState("");

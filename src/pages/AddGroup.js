@@ -103,7 +103,7 @@ export const AddGroup = ({ navigation,route }) => {
         <View style={{flexDirection:'row',justifyContent:'space-between'}}>
         <Text style={styles.heading}>Members</Text>
         <TouchableOpacity onPress={() => editMembers()}>
-        <Text style={styles.heading}>Edit</Text>
+        <Text style={styles.edit}>EDIT</Text>
         </TouchableOpacity>
         </View>
         <SafeAreaView style={styles.memberContentContainer}>
@@ -154,6 +154,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: "Roboto",
     marginBottom: 16,
+  },
+  edit: {
+    fontSize: 14,
+    fontFamily: "Roboto",
+    marginBottom: 16,
+    marginRight:5,
+    marginTop:5,
+    color:'#c0392b'
+
   },
   memberContentContainer: {
     flexDirection: "row",

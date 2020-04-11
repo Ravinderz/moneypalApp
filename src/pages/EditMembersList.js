@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, TextInput, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { FlatList, TouchableOpacity } from "react-native-gesture-handler";
 import { ActivityIndicator } from "react-native-paper";
 import { useDispatch, useSelector } from "react-redux";
 import { Contact } from "../components/Contact";
+import * as actions from "../store/actions/contactActions";
 
 export const EditMembers = ({ route, navigation }) => {
   
@@ -38,6 +39,19 @@ export const EditMembers = ({ route, navigation }) => {
     );
   };
 
+  const removeMember = (id) => {
+    console.log(id);
+    console.log("removeMember");
+    let index = 0;
+    for(let i= 0 ; i < allMembersList.length; i++){
+      if(allMembersList[i].id === id){
+        index = i;
+      }
+    }
+    allMembersList.splice(index,1);
+    dispatch(actions.removeContact(id));
+  }
+
   return (
     <View>
       {!isLoaded ? (
@@ -59,7 +73,14 @@ export const EditMembers = ({ route, navigation }) => {
               <FlatList
                 data={filteredMembers}
                 renderItem={({ item }) => 
-                  <Contact item={item} showRemoveBtn={true}/>
+                <View style={{flexDirection:"row",justifyContent: "space-between",borderBottomWidth: 1,
+                borderBottomColor: "#ecf0f1"}}>
+                  <Contact item={item} showRemoveBtn={false}/>
+                  {item.name !== 'new' ? 
+                  <TouchableOpacity style={styles.removeBtn} onPress={() => removeMember(item.id)}><Text style={{color:'#fff',fontFamily:'Roboto',fontSize:16}}>Remove</Text></TouchableOpacity>
+                  : <></>}
+                  </View>
+                  
                 }
                 keyExtractor={(item) => item.id}
               />
@@ -98,4 +119,5 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 20,
   },
+  removeBtn: { justifyContent: "center", padding:28, backgroundColor:'#c0392b'},
 });
